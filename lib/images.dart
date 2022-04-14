@@ -7,10 +7,7 @@ abstract class Images {
   static const String homeAlone ='assets/home_alone.jpg';
   static const String dontLookUp = 'assets/dont_look_up.jpg';
   static const String forestGump = 'assets/forest_gump.jpg';
-
-
-
-
+  static const String holop = 'assets/holop.jpg';
 
 
 }

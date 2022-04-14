@@ -11,15 +11,16 @@ abstract class Film {
   final String releaseDate;
   final String description;
   final String language;
+  final double voteAverage;
 
   Film(this.id, this.title, this.picture, this.releaseDate, this.description,
-      this.language);
+      this.language, this.voteAverage);
 }
 
 class Comedy extends Film with ConvertLanguageMix {
   Comedy(String id, String title, String picture, String releaseDate,
-      String description, String language)
-      : super(id, title, picture, releaseDate, description, language);
+      String description, String language, double voteAverage)
+      : super(id, title, picture, releaseDate, description, language, voteAverage);
 }
 
 enum Language { russian, english }
@@ -41,6 +42,9 @@ extension ChoicedLanguageExtension on Language {
 }
 
 class FilmListWidget extends StatefulWidget {
+
+  static const String routeName = '/filmListWidget';
+
   const FilmListWidget({Key? key}) : super(key: key);
 
   @override
@@ -51,22 +55,24 @@ class _FilmListWidgetState extends State<FilmListWidget> {
 
   final _films = [
     Comedy('1', 'Красотка', Images.prettyWoman, '9 июля 1990',
-        Strings.prettyWomanDescription, 'Английский'),
+        Strings.prettyWomanDescription, 'Английский', 8.0),
     Comedy('2', 'Гарфилд', Images.garfild, '18 ноября 2004',
-        Strings.garfildDescription, 'Английский'),
+        Strings.garfildDescription, 'Английский', 6.8),
     Comedy('3', 'Один дома', Images.homeAlone, '17 октября 1990 г.',
-        Strings.homeDescription, 'Английский'),
+        Strings.homeDescription, 'Английский', 8.3),
     Comedy('4', 'Не смотри наверх', Images.dontLookUp, '8 сентября 2021',
-        Strings.dontLookUpDescription, 'Английский'),
+        Strings.dontLookUpDescription, 'Английский', 7.5),
     Comedy('5', 'Форест Гамп', Images.forestGump, '18 января 1994',
-        Strings.forestDescription, 'Английский'),
+        Strings.forestDescription, 'Английский', 8.9),
+    Comedy('6', 'Холоп', Images.holop, '25 сентября 2019',
+        Strings.holopDescription, 'Русский', 6.8),
   ];
 
   var _filterFilms = <Film>[];
 
   final _searchController = TextEditingController();
 
-  Future<void> _searchFilms() async {
+  void _searchFilms() {
     final query = _searchController.text;
     if (query.isNotEmpty) {
       _filterFilms =  _films.where((Film film) {
@@ -90,6 +96,10 @@ class _FilmListWidgetState extends State<FilmListWidget> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(Strings.titleApp),
+        actions: [
+          IconButton(onPressed: () => Navigator.pushNamed(context, '/filterFilmsWidget'),
+              icon: const Icon(Icons.filter_alt))
+        ],
       ),
       body: Stack(
         children: [

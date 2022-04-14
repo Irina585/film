@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'film_list_widget.dart';
+import 'filter_films_wiget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: FilmListWidget(),
+      routes: {
+        '/filterFilmsWidget': (context) => const FilterFilmsWidget(),
+      },
     );
   }
 }
