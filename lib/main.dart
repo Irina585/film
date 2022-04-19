@@ -1,7 +1,9 @@
+import 'package:film/app/models/film_card_model.dart';
+import 'package:film/app/widgets/buttons/main_page.dart';
+import 'package:film/feauters/home/pages/catalog_page.dart';
+import 'package:film/feauters/home/pages/film_detail_page.dart';
+import 'package:film/feauters/home/pages/settings_page.dart';
 import 'package:flutter/material.dart';
-
-import 'film_list_widget.dart';
-import 'filter_films_wiget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +15,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FilmListWidget(),
+      initialRoute: '/',
       routes: {
-        '/filterFilmsWidget': (context) => const FilterFilmsWidget(),
+        '/': (context) => const MainPage(),
+        '/catalogPage': (context) => const CatalogPage(),
+        '/settings': (context) =>
+            const SettingsPage(arguments: SettingsArguments('Ирина')),
+        '/filmDetailPage': (context) => const FilmDetailsPage(),
+      },
+      onGenerateRoute: (RouteSettings settings) {
+        if (settings.name == SettingsPage.routeName) {
+          final SettingsArguments arguments =
+              settings.arguments as SettingsArguments;
+          return MaterialPageRoute(
+            builder: (context) {
+              return SettingsPage(
+                arguments: arguments,
+              );
+            },
+          );
+        }
       },
     );
   }
 }
-
-
