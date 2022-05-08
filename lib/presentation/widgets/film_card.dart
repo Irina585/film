@@ -1,5 +1,6 @@
-import 'package:film/app/models/film_card_model.dart';
-import 'package:film/app/widgets/buttons/primary_button.dart';
+import 'package:film/domain/models/film_card_model.dart';
+import 'package:film/presentation/buttons/primary_button.dart';
+import 'package:film/presentation/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 
 // вёрстка карточки фильма - Grid

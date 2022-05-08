@@ -1,5 +1,6 @@
+import 'package:flutter/material.dart';
+
 // модель карточки фильма
-import 'package:flutter/cupertino.dart';
 
 class FilmCardModel {
   const FilmCardModel({
@@ -9,7 +10,8 @@ class FilmCardModel {
     this.voteAverage = 0,
     this.releaseDate = '',
     this.description = '',
-    required this.icon,
+    this.language = '',
+    this.icon = const Icon(Icons.favorite),
   });
 
   final int id;
@@ -18,5 +20,6 @@ class FilmCardModel {
   final double voteAverage;
   final String releaseDate;
   final String description;
+  final String language;
   final Icon icon;
 }

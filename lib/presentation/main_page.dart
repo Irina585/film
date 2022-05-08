@@ -1,5 +1,5 @@
-import 'package:film/feauters/home/pages/catalog_page.dart';
-import 'package:film/feauters/home/pages/home_page.dart';
+import 'package:film/presentation/pages/catalog_page.dart';
+import 'package:film/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class _Tab {

@@ -1,8 +1,9 @@
-import 'package:film/app/models/film_card_model.dart';
-import 'package:film/app/widgets/buttons/main_page.dart';
-import 'package:film/feauters/home/pages/catalog_page.dart';
-import 'package:film/feauters/home/pages/film_detail_page.dart';
-import 'package:film/feauters/home/pages/settings_page.dart';
+import 'package:film/presentation/pages/catalog_page.dart';
+import 'package:film/presentation/pages/film_detail_page.dart';
+import 'package:film/presentation/pages/filter_films_page.dart';
+import 'package:film/presentation/main_page.dart';
+import 'package:film/presentation/pages/home_page.dart';
+import 'package:film/presentation/settings_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
         '/settings': (context) =>
             const SettingsPage(arguments: SettingsArguments('Ирина')),
         '/filmDetailPage': (context) => const FilmDetailsPage(),
+        '/filterFilmsWidget': (context) => const FilterFilmsWidget(),
+        '/homePage': (context) => const MyHomePage(),
       },
       onGenerateRoute: (RouteSettings settings) {
         if (settings.name == SettingsPage.routeName) {

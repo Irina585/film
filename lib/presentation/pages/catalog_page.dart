@@ -1,9 +1,9 @@
-import 'package:film/feauters/home/pages/settings_page.dart';
-import 'package:film/feauters/home/widgets/film_grid.dart';
-import 'package:film/feauters/home/widgets/film_list.dart';
+import 'package:film/presentation/settings_page.dart';
+import 'package:film/presentation/film_grid.dart';
+import 'package:film/presentation/film_list.dart';
 import 'package:flutter/material.dart';
 
-import '../../../strings.dart';
+import '../../components/strings.dart';
 
 class CatalogPage extends StatelessWidget {
   static const String routeName = '/catalogPage';
