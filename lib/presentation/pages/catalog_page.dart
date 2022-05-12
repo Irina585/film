@@ -1,6 +1,5 @@
-import 'package:film/presentation/settings_page.dart';
-import 'package:film/presentation/film_grid.dart';
-import 'package:film/presentation/film_list.dart';
+import 'package:film/bloc/home_bloc/film_grid.dart';
+import 'package:film/presentation/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/strings.dart';

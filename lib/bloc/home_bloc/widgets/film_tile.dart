@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:film/bloc/detail_bloc/detail_bloc.dart';
+import 'package:film/bloc/detail_bloc/detail_event.dart';
 import 'package:film/components/const.dart';
+import 'package:film/components/theme_text.dart';
 import 'package:film/domain/models/film_card_model.dart';
-import 'package:film/presentation/film_list.dart';
-import 'package:film/presentation/pages/film_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 
 // вёрстка карточки фильма - List
@@ -49,16 +51,20 @@ class _FilmTileState extends State<FilmTile> {
           color: Colors.transparent,
           child: InkWell(
             onTap: () {
+              context.read<DetailBloc>().add(PressedOnFilmDetailTilePage());
+            },
+            /*
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const FilmDetailsPage(),
+                    builder: (context) => const FilmDetailsTilePage(),
                     settings: RouteSettings(
                       arguments: FilmList.films.firstWhere(
                           (element) => element.id == widget.filmCardModel?.id),
                     )),
               );
-            },
+            },*/
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Column(

@@ -43,6 +43,21 @@ dependencies:
   flutter_html: ^2.2.1
   flutter_cache_manager: ^3.3.0
   cached_network_image: ^3.2.0
+  shared_preferences: ^2.0.13
+  flutter_launcher_icons: ^0.9.2
+  flutter_bloc: ^8.0.1
+  equatable: ^2.0.3
+  bloc: ^8.0.3
+
+flutter_icons:
+  #for ios
+  ios: true
+  image_path: 'assets/ic_launcher_film.png'
+  remove_alpha_ios: true
+  #for android
+  android: true
+  adaptive_icon_foreground: 'assets/ic_launcher_film.png'
+  adaptive_icon_background: '#FFFFFF'
 
 dev_dependencies:
   flutter_test:

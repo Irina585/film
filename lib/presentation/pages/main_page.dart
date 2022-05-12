@@ -11,6 +11,8 @@ class _Tab {
 }
 
 class MainPage extends StatefulWidget {
+  static const String routeName = '/mainPage';
+
   static const List<_Tab> _tabs = <_Tab>[
     _Tab(
         icon: Icon(Icons.local_movies_outlined),

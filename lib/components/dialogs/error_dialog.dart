@@ -1,3 +1,4 @@
+import 'package:film/bloc/home_bloc/film_list.dart';
 import 'package:flutter/material.dart';
 
 class ErrorDialog extends StatelessWidget {
@@ -44,6 +45,12 @@ class ErrorDialog extends StatelessWidget {
 }
 
 /// Функция вызова диалога ошибки
-void showErrorDialog(BuildContext context, {required String error}) {
-  showDialog(context: context, builder: (_) => ErrorDialog(error));
+void showErrorDialog({BuildContext? context, required String error}) {
+  final _context = context ?? FilmList.globalKey.currentContext;
+  if (_context != null) {
+    showDialog(
+      context: _context,
+      builder: (_) => ErrorDialog(error),
+    );
+  }
 }

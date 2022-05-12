@@ -1,8 +1,7 @@
-import 'package:film/domain/models/film_card_model.dart';
-import 'package:film/components/general_classes.dart';
-import 'package:film/presentation/film_list.dart';
+import 'package:film/components/buttons/widget/button_base.dart';
+import 'package:film/components/buttons/scale_button.dart';
+import 'package:film/components/buttons/type_button.dart';
 import 'package:film/components/strings.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -16,29 +15,14 @@ class FilterFilmsWidget extends StatefulWidget {
 }
 
 class _FilterFilmsWidgetState extends State<FilterFilmsWidget> {
-  final _language = Language.russian.toPrettyString;
   bool _checkedRus = false;
   bool _checkedEn = false;
 
   double size = 5;
 
-  var filterFilms = <FilmCardModel>[];
-
-  void _search() {
-    if (_checkedRus == true || _checkedRus == true) {
-      filterFilms = FilmList.films.where((element) {
-        return element.language.contains(_language.toString());
-      }).toList();
-    } else {
-      filterFilms = FilmList.films;
-    }
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
-    _search();
   }
 
   @override
@@ -98,12 +82,14 @@ class _FilterFilmsWidgetState extends State<FilterFilmsWidget> {
                       });
                     }),
                 const SizedBox(height: 30),
-                ElevatedButton(
-                    onPressed: () {
-                      _search();
-                      Navigator.pop(context, '/homePage');
-                    },
-                    child: const Text('Поиск'))
+                BaseButton(
+                  type: ButtonType.primary,
+                  scale: ButtonScale.medium,
+                  child: const Text('Поиск'),
+                  onPressed: () {
+                    Navigator.pop(context, '/homePage');
+                  },
+                ),
               ],
             ),
           ),

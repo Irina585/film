@@ -1,22 +1,24 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:film/components/buttons/widget/button_base.dart';
+import 'package:film/components/buttons/scale_button.dart';
+import 'package:film/components/buttons/type_button.dart';
+import 'package:film/components/const.dart';
 import 'package:film/domain/models/film_card_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FilmDetailsPage extends StatelessWidget {
-  static const String routeName = '/filmDetailPage';
+class FilmDetailTilePage extends StatelessWidget {
+  static const String routeName = '/filmDetailTilePage';
 
-  const FilmDetailsPage({
-    Key? key,
-  }) : super(key: key);
+  final FilmCardModel? filmCardModel;
+
+  const FilmDetailTilePage({Key? key, this.filmCardModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final FilmCardModel detail =
-        ModalRoute.of(context)!.settings.arguments as FilmCardModel;
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(detail.title),
+        title: Text('${filmCardModel?.title}'),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -24,9 +26,12 @@ class FilmDetailsPage extends StatelessWidget {
                 LinearGradient(colors: [Color(0xff374ABE), Color(0xff64B6FF)])),
         child: ListView(
           children: [
-            Image.network(
-              detail.picture,
-              fit: BoxFit.fill,
+            CachedNetworkImage(
+              imageUrl: '${filmCardModel?.picture}',
+              fit: BoxFit.cover,
+              errorWidget: (_, __, ___) =>
+                  Image.network(FilmQuery.pisecImageUrl),
+              cacheManager: FilmPictures.pictureCache,
             ),
             Container(
               decoration: const BoxDecoration(
@@ -36,14 +41,14 @@ class FilmDetailsPage extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 15),
-                  Text(detail.title,
+                  Text('${filmCardModel?.title}',
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
                           color: Colors.white)),
                   const SizedBox(height: 5),
-                  Text(detail.releaseDate,
+                  Text('${filmCardModel?.releaseDate}',
                       overflow: TextOverflow.ellipsis,
                       style:
                           const TextStyle(fontSize: 17, color: Colors.white)),
@@ -51,7 +56,7 @@ class FilmDetailsPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(detail.voteAverage.toString(),
+                      Text('${filmCardModel?.voteAverage}'.toString(),
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                               fontWeight: FontWeight.normal,
@@ -63,15 +68,12 @@ class FilmDetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadiusDirectional.circular(20))),
+                  BaseButton(
+                    type: ButtonType.primary,
+                    scale: ButtonScale.medium,
+                    child: const Text('Смотреть фильм'),
                     onPressed: () {},
-                    icon: const Icon(Icons.play_arrow),
-                    label: const Text('Смотреть фильм'),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -86,7 +88,7 @@ class FilmDetailsPage extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(width: 15),
-                  Text(detail.description,
+                  Text('${filmCardModel?.description}',
                       style: const TextStyle(
                           fontSize: 17, fontWeight: FontWeight.normal),
                       textAlign: TextAlign.justify)

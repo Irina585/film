@@ -1,4 +1,4 @@
-import 'package:film/presentation/film_list.dart';
+import 'package:film/bloc/home_bloc/film_list.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/strings.dart';
