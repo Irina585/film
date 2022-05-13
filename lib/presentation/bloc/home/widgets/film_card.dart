@@ -1,48 +1,19 @@
-import 'package:film/bloc/home_bloc/film_list.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:film/components/buttons/widget/button_base.dart';
 import 'package:film/components/buttons/scale_button.dart';
 import 'package:film/components/buttons/type_button.dart';
+import 'package:film/components/const.dart';
 import 'package:film/domain/models/film_card_model.dart';
-import 'package:film/presentation/pages/film_detail_grid_page.dart';
+import 'package:film/presentation/bloc/detail/film_detail_tile_page.dart';
+import 'package:film/presentation/bloc/home/film_list.dart';
 import 'package:flutter/material.dart';
 
 // вёрстка карточки фильма - Grid
 
 class FilmCard extends StatefulWidget {
-  const FilmCard(
-      {Key? key,
-      required this.id,
-      required this.title,
-      required this.picture,
-      required this.voteAverage,
-      required this.releaseDate,
-      required this.description,
-      required this.icon})
-      : super(key: key);
+  final FilmCardModel? filmCardModel;
 
-  final int id;
-  final String title;
-  final String picture;
-  final double voteAverage;
-  final String releaseDate;
-  final String description;
-  final Icon icon;
-
-  factory FilmCard.fromModel({
-    required FilmCardModel model,
-    Key? key,
-  }) {
-    return FilmCard(
-      id: model.id,
-      title: model.title,
-      picture: model.picture,
-      voteAverage: model.voteAverage,
-      releaseDate: model.releaseDate,
-      description: model.description,
-      icon: model.icon,
-      key: key,
-    );
-  }
+  const FilmCard({Key? key, this.filmCardModel}) : super(key: key);
 
   @override
   _FilmCardState createState() => _FilmCardState();
@@ -66,18 +37,12 @@ class _FilmCardState extends State<FilmCard> {
           Positioned.fill(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                widget.picture,
+              child: CachedNetworkImage(
+                imageUrl: '${widget.filmCardModel?.picture}',
                 fit: BoxFit.cover,
-                loadingBuilder: (BuildContext context, Widget child,
-                    ImageChunkEvent? loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
+                errorWidget: (_, __, ___) =>
+                    Image.network(FilmQuery.pisecImageUrl),
+                cacheManager: FilmPictures.pictureCache,
               ),
             ),
           ),
@@ -89,10 +54,10 @@ class _FilmCardState extends State<FilmCard> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const FilmDetailGridePage(),
+                        builder: (context) => const FilmDetailTilePage(),
                         settings: RouteSettings(
-                          arguments: FilmList.films
-                              .firstWhere((element) => element.id == widget.id),
+                          arguments: FilmList.films.firstWhere((element) =>
+                              element.id == widget.filmCardModel?.id),
                         )),
                   );
                 },

@@ -1,6 +1,5 @@
-import 'package:film/bloc/detail_bloc/detail_event.dart';
-import 'package:film/bloc/detail_bloc/detail_state.dart';
-import 'package:film/presentation/pages/film_detail_tile_page.dart';
+import 'package:film/presentation/bloc/detail/bloc/detail_event.dart';
+import 'package:film/presentation/bloc/detail/bloc/detail_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailBloc extends Bloc<DetailEvent, DetailState> {

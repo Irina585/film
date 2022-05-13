@@ -1,15 +1,16 @@
-import 'package:film/bloc/detail_bloc/detail_bloc.dart';
-import 'package:film/bloc/error_bloc/error_bloc.dart';
-import 'package:film/bloc/error_bloc/error_event.dart';
-import 'package:film/bloc/home_bloc/bloc/home_bloc.dart';
 import 'package:film/data/reppositories/films_repositories.dart';
+import 'package:film/presentation/bloc/detail/bloc/detail_bloc.dart';
+import 'package:film/presentation/bloc/detail/film_detail_tile_page.dart';
+import 'package:film/presentation/bloc/error_bloc/error_bloc.dart';
+import 'package:film/presentation/bloc/error_bloc/error_event.dart';
+import 'package:film/presentation/bloc/home/bloc/home_bloc.dart';
+import 'package:film/presentation/bloc/settings/settings_page.dart';
 import 'package:film/presentation/pages/catalog_page.dart';
 import 'package:film/presentation/pages/film_detail_grid_page.dart';
-import 'package:film/presentation/pages/film_detail_tile_page.dart';
 import 'package:film/presentation/pages/filter_films_page.dart';
 import 'package:film/presentation/pages/main_page.dart';
 import 'package:film/presentation/pages/home_page.dart';
-import 'package:film/presentation/pages/settings_page.dart';
+import 'package:film/presentation/pages/not_found_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,6 +26,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
+      onGenerateRoute: (RouteSettings settings) {
+        if (settings.name == MainPage.routeName) {
+          return MaterialPageRoute(
+            builder: (context) {
+              return const MainPage();
+            },
+          );
+        }
+        if (settings.name == SettingsPage.routeName) {
+          return MaterialPageRoute(
+            builder: (context) {
+              return const SettingsPage();
+            },
+          );
+        }
+        return MaterialPageRoute(
+          builder: (_) => const NoFoundPage(),
+        );
+      },
       routes: {
         '/': (context) => BlocProvider<ErrorBloc>(
               lazy: false,
@@ -57,25 +77,12 @@ class MyApp extends StatelessWidget {
               ),
             ),
         '/catalogPage': (context) => const CatalogPage(),
-        '/settings': (context) =>
-            const SettingsPage(arguments: SettingsArguments('Ирина')),
-        '/filmDetailGridPage': (context) => const FilmDetailGridePage(),
+        '/settings': (context) => const SettingsPage(),
+        // '/filmDetailGridPage': (context) => const FilmDetailGridePage(),
         '/filmDetailTilePage': (context) => const FilmDetailTilePage(),
         '/filterFilmsWidget': (context) => const FilterFilmsWidget(),
-        '/homePage': (context) => const MyHomePage(),
-      },
-      onGenerateRoute: (RouteSettings settings) {
-        if (settings.name == SettingsPage.routeName) {
-          final SettingsArguments arguments =
-              settings.arguments as SettingsArguments;
-          return MaterialPageRoute(
-            builder: (context) {
-              return SettingsPage(
-                arguments: arguments,
-              );
-            },
-          );
-        }
+        '/homePage': (context) => const HomePage(),
+        '/noFoundPage': (context) => const NoFoundPage(),
       },
     );
   }

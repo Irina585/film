@@ -1,5 +1,5 @@
-import 'package:film/bloc/home_bloc/film_grid.dart';
-import 'package:film/presentation/pages/settings_page.dart';
+import 'package:film/presentation/bloc/home/film_grid.dart';
+import 'package:film/presentation/bloc/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/strings.dart';
@@ -16,9 +16,9 @@ class CatalogPage extends StatelessWidget {
         title: const Text(Strings.titleApp),
         actions: [
           IconButton(
-              onPressed: () => Navigator.pushNamed(context, '/settings',
-                  arguments: const SettingsArguments('Ирина')),
-              icon: const Icon(Icons.settings))
+              onPressed: () =>
+                  Navigator.pushNamed(context, SettingsPage.routeName),
+              icon: const Icon(Icons.settings)),
         ],
       ),
       body: const FilmGrid(),

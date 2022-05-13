@@ -1,9 +1,3 @@
-import 'package:film/bloc/detail_bloc/detail_bloc.dart';
-import 'package:film/bloc/detail_bloc/detail_state.dart';
-import 'package:film/bloc/home_bloc/bloc/home_bloc.dart';
-import 'package:film/bloc/home_bloc/bloc/home_event.dart';
-import 'package:film/bloc/home_bloc/bloc/home_state.dart';
-import 'package:film/bloc/home_bloc/widgets/film_tile.dart';
 import 'package:film/components/const.dart';
 import 'package:film/components/delayed_action.dart';
 import 'package:film/components/general_classes.dart';
@@ -11,11 +5,16 @@ import 'package:film/components/strings.dart';
 import 'package:film/data/dtos/tv_maz/show_card_dto.dart';
 import 'package:film/domain/models/film_card_model.dart';
 import 'package:film/domain/models/home_model.dart';
+import 'package:film/presentation/bloc/detail/bloc/detail_bloc.dart';
+import 'package:film/presentation/bloc/detail/bloc/detail_state.dart';
+import 'package:film/presentation/bloc/home/bloc/home_bloc.dart';
+import 'package:film/presentation/bloc/home/bloc/home_event.dart';
+import 'package:film/presentation/bloc/home/bloc/home_state.dart';
+import 'package:film/presentation/bloc/home/widgets/film_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:provider/src/provider.dart';
 
 // реализация списка фильмов с помощью ListView.Builder
 
@@ -175,8 +174,8 @@ class _FilmListState extends State<FilmList> {
                                         ),
                                       ),
                                     )
-                                  : const _Empty()
-                              : const _Error();
+                                  : const Empty()
+                              : const Error();
                     },
                   );
                 }),
@@ -204,8 +203,8 @@ class _FilmListState extends State<FilmList> {
   }
 }
 
-class _Error extends StatelessWidget {
-  const _Error({Key? key}) : super(key: key);
+class Error extends StatelessWidget {
+  const Error({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -216,8 +215,8 @@ class _Error extends StatelessWidget {
   }
 }
 
-class _Empty extends StatelessWidget {
-  const _Empty({Key? key}) : super(key: key);
+class Empty extends StatelessWidget {
+  const Empty({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

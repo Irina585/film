@@ -1,4 +1,4 @@
-import 'package:film/bloc/home_bloc/film_list.dart';
+import 'package:film/presentation/bloc/home/film_list.dart';
 import 'package:flutter/material.dart';
 
 class ErrorDialog extends StatelessWidget {

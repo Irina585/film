@@ -1,7 +1,7 @@
-import 'package:film/bloc/home_bloc/bloc/home_event.dart';
-import 'package:film/bloc/home_bloc/bloc/home_state.dart';
 import 'package:film/components/const.dart';
 import 'package:film/data/reppositories/films_repositories.dart';
+import 'package:film/presentation/bloc/home/bloc/home_event.dart';
+import 'package:film/presentation/bloc/home/bloc/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {

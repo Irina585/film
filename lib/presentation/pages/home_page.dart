@@ -1,12 +1,13 @@
-import 'package:film/bloc/home_bloc/film_list.dart';
+import 'package:film/presentation/bloc/home/film_list.dart';
+import 'package:film/presentation/bloc/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/strings.dart';
 
-class MyHomePage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   static const String routeName = '/homePage';
 
-  const MyHomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +17,12 @@ class MyHomePage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () =>
-                  Navigator.pushNamed(context, '/filterFilmsWidget'),
-              icon: const Icon(Icons.filter_alt))
+                  Navigator.pushNamed(context, SettingsPage.routeName),
+              icon: const Icon(Icons.settings)),
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, '/filterFilmsWidget'),
+            icon: const Icon(Icons.filter_alt),
+          )
         ],
       ),
       body: const FilmList(),

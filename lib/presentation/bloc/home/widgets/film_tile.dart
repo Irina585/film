@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:film/bloc/detail_bloc/detail_bloc.dart';
-import 'package:film/bloc/detail_bloc/detail_event.dart';
 import 'package:film/components/const.dart';
 import 'package:film/components/theme_text.dart';
 import 'package:film/domain/models/film_card_model.dart';
+import 'package:film/presentation/bloc/detail/bloc/detail_bloc.dart';
+import 'package:film/presentation/bloc/detail/bloc/detail_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';

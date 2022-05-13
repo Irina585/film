@@ -4,7 +4,7 @@ import 'package:film/components/buttons/type_button.dart';
 import 'package:film/domain/models/film_card_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+/*
 class FilmDetailGridePage extends StatelessWidget {
   static const String routeName = '/filmDetailGridPage';
 
@@ -99,3 +99,5 @@ class FilmDetailGridePage extends StatelessWidget {
     );
   }
 }
+
+ */

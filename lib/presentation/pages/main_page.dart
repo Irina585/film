@@ -16,7 +16,7 @@ class MainPage extends StatefulWidget {
   static const List<_Tab> _tabs = <_Tab>[
     _Tab(
         icon: Icon(Icons.local_movies_outlined),
-        page: MyHomePage(),
+        page: HomePage(),
         label: 'Feed'),
     _Tab(icon: Icon(Icons.movie_filter), page: CatalogPage(), label: 'Catalog')
   ];
