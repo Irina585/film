@@ -12,6 +12,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
   syncfusion_flutter_sliders: ^19.4.41
 
   cupertino_icons: ^1.0.2
@@ -31,6 +34,10 @@ dependencies:
   path_provider: ^2.0.10
   path: ^1.8.0
   infinite_scroll_pagination: ^3.1.0
+
+  #firebase
+  firebase_core: ^1.12.0
+  firebase_crashlytics: ^2.5.2
 
 flutter_icons:
   #for ios

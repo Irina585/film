@@ -6,14 +6,21 @@ import 'package:film/presentation/pages/filter_films_page.dart';
 import 'package:film/presentation/pages/main_page.dart';
 import 'package:film/presentation/pages/tabs/home_page.dart';
 import 'package:film/presentation/pages/not_found_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app/components/locals/locals.dart';
 import 'app/locale_bloc/locale_bloc.dart';
 import 'app/locale_bloc/locale_state.dart';
 
-void main() {
+void main() async {
+  /// переинициализация перед инициализацией Firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseCrashlytics.instance.crash();
   runApp(const MyApp());
 }
 
@@ -25,14 +32,16 @@ class MyApp extends StatelessWidget {
     return BlocProvider<LocaleBloc>(
       lazy: false,
       create: (_) => LocaleBloc(),
-      // сделаем реакцию на изменение состояния,
-      //при которой будут подставляться другие объекты со строками локализации
+
+      /// сделаем реакцию на изменение состояния,
+      /// при которой будут подставляться другие объекты со строками локализации
       child: BlocBuilder<LocaleBloc, LocaleState>(
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            // Прокидываем нашу локаль из стейта, а делегат проверяет ее на
-            // возможность использования в supportedLocales
+
+            /// Прокидываем нашу локаль из стейта, а делегат проверяет ее на
+            /// возможность использования в supportedLocales
             locale: state.locale,
             localizationsDelegates: <LocalizationsDelegate<dynamic>>[
               GlobalWidgetsLocalizations.delegate,

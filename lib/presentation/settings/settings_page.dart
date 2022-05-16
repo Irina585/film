@@ -1,6 +1,7 @@
 import 'package:film/app/components/buttons/base_button/scale_button.dart';
 import 'package:film/app/components/buttons/base_button/type_button.dart';
 import 'package:film/app/components/buttons/base_button/widget/button_base.dart';
+import 'package:film/app/components/locals/locals.dart';
 import 'package:film/presentation/settings/bloc/settings_bloc.dart';
 import 'package:film/presentation/settings/bloc/settings_event.dart';
 import 'package:film/presentation/settings/bloc/settings_state.dart';
@@ -33,7 +34,7 @@ class SettingsPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(context.locale.settings),
       ),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -45,7 +46,7 @@ class SettingsPageContent extends StatelessWidget {
           BaseButton(
             type: ButtonType.primary,
             scale: ButtonScale.medium,
-            child: const Text('Получить имя'),
+            child: Text(context.locale.getName),
             onPressed: () {
               context.read<SettingBloc>().add(LoadNameEvent());
             },
@@ -53,7 +54,7 @@ class SettingsPageContent extends StatelessWidget {
           BaseButton(
             type: ButtonType.primary,
             scale: ButtonScale.medium,
-            child: const Text('Сохранить имя'),
+            child: Text(context.locale.saveName),
             onPressed: () {
               context
                   .read<SettingBloc>()
@@ -63,7 +64,7 @@ class SettingsPageContent extends StatelessWidget {
           BaseButton(
             type: ButtonType.primary,
             scale: ButtonScale.medium,
-            child: const Text('Очистить имя'),
+            child: Text(context.locale.clearName),
             onPressed: () {
               context.read<SettingBloc>().add(ClearNameEvent());
             },

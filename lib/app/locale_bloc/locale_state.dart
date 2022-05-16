@@ -11,3 +11,5 @@ class LocaleState extends Equatable {
   @override
   List<Object> get props => [locale];
 }
+
+//final bool isEnLocale;

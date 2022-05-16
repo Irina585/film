@@ -21,7 +21,6 @@ class HomeState extends Equatable {
     String? search,
     Future<HomeModel?>? data,
     List<FilmCardModel>? favoritesFilms,
-    List<FilmCardModel>? detailsFilms,
   }) =>
       HomeState(
         search: search ?? this.search,

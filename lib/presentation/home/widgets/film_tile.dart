@@ -83,10 +83,11 @@ class FilmTile extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 3),
                                 Text(
-                                    'Дата выхода: ${filmCardModel?.releaseDate}',
+                                    '${context.locale.releaseDate} ${filmCardModel?.releaseDate}',
                                     style: mainTextStyle),
                                 const SizedBox(height: 3),
-                                Text('Язык: ${filmCardModel?.language}',
+                                Text(
+                                    '${context.locale.language} ${filmCardModel?.language}',
                                     style: mainTextStyle),
                                 const SizedBox(height: 3),
                                 Padding(

@@ -72,10 +72,6 @@ class _FilmListState extends State<FilmList> {
                 Flexible(
                   child: Text(
                     context.locale.switchLanguage,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5!
-                        .copyWith(color: Colors.white),
                   ),
                 ),
               ],

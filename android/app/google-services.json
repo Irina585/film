@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "397888168876",
+    "project_id": "film-1885b",
+    "storage_bucket": "film-1885b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:397888168876:android:bb57e0510080205c42d009",
+        "android_client_info": {
+          "package_name": "com.example.film"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "397888168876-f7st1ok7ft099vtjc80ef7ed00ab7aqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2VeJZQMTplZJbaLNMLlaLQ5wE8cTIv8k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "397888168876-f7st1ok7ft099vtjc80ef7ed00ab7aqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
