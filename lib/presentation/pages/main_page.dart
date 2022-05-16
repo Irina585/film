@@ -1,6 +1,14 @@
-import 'package:film/presentation/pages/catalog_page.dart';
-import 'package:film/presentation/pages/home_page.dart';
+import 'package:film/app/error_bloc/error_bloc.dart';
+import 'package:film/app/error_bloc/error_event.dart';
+import 'package:film/data/repositories/films_repositories.dart';
+import 'package:film/presentation/home/bloc/home_bloc.dart';
+import 'package:film/presentation/navigation/bloc/navigation_bloc.dart';
+import 'package:film/presentation/pages/film_detail_page.dart';
+import 'package:film/presentation/pages/tabs/catalog_page.dart';
+import 'package:film/presentation/pages/tabs/favorite_page.dart';
+import 'package:film/presentation/pages/tabs/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class _Tab {
   const _Tab({required this.icon, required this.page, required this.label});
@@ -11,14 +19,15 @@ class _Tab {
 }
 
 class MainPage extends StatefulWidget {
-  static const String routeName = '/mainPage';
+  static const String routeName = '/';
 
   static const List<_Tab> _tabs = <_Tab>[
     _Tab(
         icon: Icon(Icons.local_movies_outlined),
         page: HomePage(),
         label: 'Feed'),
-    _Tab(icon: Icon(Icons.movie_filter), page: CatalogPage(), label: 'Catalog')
+    _Tab(icon: Icon(Icons.movie_filter), page: CatalogPage(), label: 'Catalog'),
+    _Tab(icon: Icon(Icons.favorite), page: FavoritePage(), label: 'Favorite'),
   ];
 
   const MainPage({Key? key}) : super(key: key);
@@ -38,15 +47,45 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: MainPage._tabs.elementAt(_selectedIndex).page,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        items: List.generate(MainPage._tabs.length, (index) {
-          final _Tab tab = MainPage._tabs[index];
-          return BottomNavigationBarItem(icon: tab.icon, label: tab.label);
-        }),
-        onTap: _onItemTapped,
+    return BlocProvider<ErrorBloc>(
+      lazy: false,
+      create: (_) => ErrorBloc(),
+      child: RepositoryProvider<FilmsRepository>(
+        lazy: true,
+        create: (BuildContext context) => FilmsRepository(
+          onErrorHandler: (String code, String message) {
+            context
+                .read<ErrorBloc>()
+                .add(ShowDialogEvent(title: code, message: message));
+          },
+        ),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<HomeBloc>(
+              lazy: false,
+              create: (BuildContext context) =>
+                  HomeBloc(context.read<FilmsRepository>()),
+              child: const MainPage(),
+            ),
+            BlocProvider<NavigationBloc>(
+              lazy: false,
+              create: (BuildContext context) => NavigationBloc(),
+              child: const FilmDetailPage(),
+            ),
+          ],
+          child: Scaffold(
+            body: MainPage._tabs.elementAt(_selectedIndex).page,
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: _selectedIndex,
+              items: List.generate(MainPage._tabs.length, (index) {
+                final _Tab tab = MainPage._tabs[index];
+                return BottomNavigationBarItem(
+                    icon: tab.icon, label: tab.label);
+              }),
+              onTap: _onItemTapped,
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -4,17 +4,6 @@ import 'package:flutter/material.dart';
 /// Чистая модель карточки с фильмом для отображения на UI
 
 class FilmCardModel {
-  const FilmCardModel({
-    required this.id,
-    this.title = '',
-    this.picture = '',
-    this.voteAverage = 0,
-    this.releaseDate = '',
-    this.description = '',
-    this.language = '',
-    this.icon = const Icon(Icons.favorite),
-  });
-
   final int id;
   final String title;
   final String? picture;
@@ -23,9 +12,20 @@ class FilmCardModel {
   final String? description;
   final String language;
   final Icon icon;
+
+  const FilmCardModel({
+    required this.id,
+    required this.title,
+    this.picture = '',
+    this.voteAverage = 0,
+    this.releaseDate = '',
+    this.description = '',
+    this.language = '',
+    this.icon = const Icon(Icons.favorite),
+  });
 }
 
-/// Функция преобразования из [FilmCardModel] в [FilmTableData]
+// Функция преобразования из [FilmCardModel] в [FilmTableData]
 extension FilmCardModelToDatabase on FilmCardModel {
   FilmTableData toDatabase() {
     return FilmTableData(
@@ -39,7 +39,7 @@ extension FilmCardModelToDatabase on FilmCardModel {
   }
 }
 
-/// Функция преобразования из [FilmTableData] в [FilmCardModel]
+// Функция преобразования из [FilmTableData] в [FilmCardModel]
 extension FilmTableDataToDomain on FilmTableData {
   FilmCardModel toDomain() {
     return FilmCardModel(

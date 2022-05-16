@@ -1,7 +1,7 @@
-import 'package:film/components/buttons/widget/button_base.dart';
-import 'package:film/components/buttons/scale_button.dart';
-import 'package:film/components/buttons/type_button.dart';
-import 'package:film/components/strings.dart';
+import 'package:film/app/components/buttons/base_button/scale_button.dart';
+import 'package:film/app/components/buttons/base_button/type_button.dart';
+import 'package:film/app/components/buttons/base_button/widget/button_base.dart';
+import 'package:film/app/components/const.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -29,7 +29,7 @@ class _FilterFilmsWidgetState extends State<FilterFilmsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(Strings.titleAppFilter),
+          title: const Text(FilmLocal.titleAppFilter),
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),

@@ -1,4 +1,4 @@
-import 'package:film/components/strings.dart';
+import 'package:film/app/components/const.dart';
 import 'package:flutter/material.dart';
 
 class NoFoundPage extends StatelessWidget {
@@ -10,9 +10,9 @@ class NoFoundPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(Strings.titleApp),
+        title: const Text(FilmLocal.titleApp),
       ),
-      body: const Text('Ничего'),
+      body: const Center(child: Text('Ничего')),
     );
   }
 }
