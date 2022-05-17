@@ -47,12 +47,6 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeBloc>(
-          lazy: false,
-          create: (BuildContext context) =>
-              HomeBloc(context.read<FilmsRepository>()),
-          child: const FilmDetailPage(),
-        ),
         BlocProvider<NavigationBloc>(
           lazy: false,
           create: (BuildContext context) => NavigationBloc(),
