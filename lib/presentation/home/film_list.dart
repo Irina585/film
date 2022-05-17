@@ -34,8 +34,6 @@ class _FilmListState extends State<FilmList> {
   /// Контроллер для работы с полем поиска
   final TextEditingController textController = TextEditingController();
 
-  bool isEnLocale = false;
-
   /// Загрузим наши фильмы сразу при запуске
   @override
   void didChangeDependencies() {
@@ -67,7 +65,7 @@ class _FilmListState extends State<FilmList> {
                     return Checkbox(
                       value: state.isEnLocale,
                       onChanged: (val) {
-                        isEnLocale = val ?? false;
+                        final isEnLocale = val ?? false;
                         context
                             .read<SettingBloc>()
                             .add(UpdateLocaleEvent(value: isEnLocale));

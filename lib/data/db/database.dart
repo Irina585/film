@@ -15,10 +15,9 @@ class Database extends _$Database {
   int get schemaVersion => 1;
 
   static LazyDatabase _openConnection() {
-    // the LazyDatabase util lets us find the right location for the file async.
+    // утилита LazyDatabase позволяет нам найти правильное место для файла async.
     return LazyDatabase(() async {
-      // put the database file, called db.sqlite here, into the documents folder
-      // for your app.
+      //поместите файл базы данных, названный здесь db.sqlite, в папку документов для вашего приложения
       final dbFolder = await getApplicationDocumentsDirectory();
       final file = File(p.join(dbFolder.path, 'db.sqlite'));
       return NativeDatabase(file);

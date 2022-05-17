@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
             /// при которой будут подставляться другие объекты со строками локализации
             child: BlocProvider<SettingBloc>(
               lazy: false,
-              create: (_) =>
+              create: (BuildContext context) =>
                   SettingBloc(context.read<LocaleBloc>())..add(LoadNameEvent()),
               child: BlocBuilder<LocaleBloc, LocaleState>(
                 builder: (context, state) {
