@@ -18,20 +18,6 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SettingBloc>(
-        lazy: false,
-        create: (_) => SettingBloc()..add(LoadNameEvent()),
-        child: const SettingsPageContent());
-  }
-}
-
-class SettingsPageContent extends StatelessWidget {
-  const SettingsPageContent({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.locale.settings),

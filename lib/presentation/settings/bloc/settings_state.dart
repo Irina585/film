@@ -2,11 +2,15 @@ import 'package:equatable/equatable.dart';
 
 class SettingState extends Equatable {
   final String? name;
-  const SettingState({this.name});
+  final bool isEnLocale;
 
-  SettingState copyWith({String? name}) =>
-      SettingState(name: name ?? this.name);
+  const SettingState({this.name, required this.isEnLocale});
+
+  SettingState copyWith({String? name, bool? isEnLocale}) => SettingState(
+        name: name ?? this.name,
+        isEnLocale: isEnLocale ?? this.isEnLocale,
+      );
 
   @override
-  List<Object?> get props => [name ?? ''];
+  List<Object?> get props => [name ?? '', isEnLocale];
 }

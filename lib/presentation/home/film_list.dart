@@ -1,8 +1,6 @@
 import 'package:film/app/components/const.dart';
 import 'package:film/app/components/delayed_action.dart';
 import 'package:film/app/components/locals/locals.dart';
-import 'package:film/app/locale_bloc/locale_bloc.dart';
-import 'package:film/app/locale_bloc/locale_event.dart';
 import 'package:film/data/dtos/tv_maz/show_card_dto.dart';
 import 'package:film/domain/models/home_model.dart';
 import 'package:film/presentation/home/bloc/home_bloc.dart';
@@ -16,6 +14,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:collection/collection.dart';
+
+import '../settings/bloc/settings_bloc.dart';
+import '../settings/bloc/settings_event.dart';
+import '../settings/bloc/settings_state.dart';
 
 // реализация списка фильмов с помощью ListView.Builder
 
@@ -60,13 +62,17 @@ class _FilmListState extends State<FilmList> {
             padding: const EdgeInsets.only(left: 10.0),
             child: Row(
               children: [
-                Checkbox(
-                  value: isEnLocale,
-                  onChanged: (val) {
-                    isEnLocale = val ?? false;
-                    context.read<LocaleBloc>().add(ChangeLocaleEvent(isEnLocale
-                        ? availableLocales[enLocale]!
-                        : availableLocales[ruLocale]!));
+                BlocBuilder<SettingBloc, SettingState>(
+                  builder: (context, state) {
+                    return Checkbox(
+                      value: state.isEnLocale,
+                      onChanged: (val) {
+                        isEnLocale = val ?? false;
+                        context
+                            .read<SettingBloc>()
+                            .add(UpdateLocaleEvent(value: isEnLocale));
+                      },
+                    );
                   },
                 ),
                 Flexible(

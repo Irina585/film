@@ -1,5 +1,3 @@
-import 'package:film/app/error_bloc/error_bloc.dart';
-import 'package:film/app/error_bloc/error_event.dart';
 import 'package:film/data/repositories/films_repositories.dart';
 import 'package:film/presentation/home/bloc/home_bloc.dart';
 import 'package:film/presentation/navigation/bloc/navigation_bloc.dart';
@@ -47,44 +45,29 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ErrorBloc>(
-      lazy: false,
-      create: (_) => ErrorBloc(),
-      child: RepositoryProvider<FilmsRepository>(
-        lazy: true,
-        create: (BuildContext context) => FilmsRepository(
-          onErrorHandler: (String code, String message) {
-            context
-                .read<ErrorBloc>()
-                .add(ShowDialogEvent(title: code, message: message));
-          },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<HomeBloc>(
+          lazy: false,
+          create: (BuildContext context) =>
+              HomeBloc(context.read<FilmsRepository>()),
+          child: const FilmDetailPage(),
         ),
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider<HomeBloc>(
-              lazy: false,
-              create: (BuildContext context) =>
-                  HomeBloc(context.read<FilmsRepository>()),
-              child: const MainPage(),
-            ),
-            BlocProvider<NavigationBloc>(
-              lazy: false,
-              create: (BuildContext context) => NavigationBloc(),
-              child: const FilmDetailPage(),
-            ),
-          ],
-          child: Scaffold(
-            body: MainPage._tabs.elementAt(_selectedIndex).page,
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: _selectedIndex,
-              items: List.generate(MainPage._tabs.length, (index) {
-                final _Tab tab = MainPage._tabs[index];
-                return BottomNavigationBarItem(
-                    icon: tab.icon, label: tab.label);
-              }),
-              onTap: _onItemTapped,
-            ),
-          ),
+        BlocProvider<NavigationBloc>(
+          lazy: false,
+          create: (BuildContext context) => NavigationBloc(),
+          child: const FilmDetailPage(),
+        ),
+      ],
+      child: Scaffold(
+        body: MainPage._tabs.elementAt(_selectedIndex).page,
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          items: List.generate(MainPage._tabs.length, (index) {
+            final _Tab tab = MainPage._tabs[index];
+            return BottomNavigationBarItem(icon: tab.icon, label: tab.label);
+          }),
+          onTap: _onItemTapped,
         ),
       ),
     );

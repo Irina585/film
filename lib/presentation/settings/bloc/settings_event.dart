@@ -16,3 +16,13 @@ class SaveNameEvent extends SettingEvent {
 }
 
 class ClearNameEvent extends SettingEvent {}
+
+class UpdateLocaleEvent extends SettingEvent {
+  final bool value;
+  const UpdateLocaleEvent({required this.value});
+
+  @override
+  List<Object?> get props => [value];
+}
+
+class LoadLocaleEvent extends SettingEvent {}
