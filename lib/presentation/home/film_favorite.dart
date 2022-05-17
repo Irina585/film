@@ -1,4 +1,3 @@
-import 'package:film/app/components/const.dart';
 import 'package:film/presentation/home/bloc/home_bloc.dart';
 import 'package:film/presentation/home/bloc/home_event.dart';
 import 'package:film/presentation/home/bloc/home_state.dart';
@@ -62,10 +61,9 @@ class _FilmFavoriteState extends State<FilmFavorite> {
                       }
                       return FilmTile(
                         // в зависимости от состояния меняем текст
-                        textButton: isFavorite
-                            ? FilmLocal.deleteFavorites
-                            : FilmLocal.addFavorites,
-                        // CallBack по клику на кнопку
+                        iconButton: isFavorite
+                            ? const Icon(Icons.favorite)
+                            : const Icon(Icons.favorite_border),
                         onClickFavoriteButton: () {
                           //отправляем событие в блок
                           context.read<HomeBloc>().add(
@@ -79,9 +77,7 @@ class _FilmFavoriteState extends State<FilmFavorite> {
                             state.favoritesFilms?[index].id ?? -1),
                       );
                     },
-                    itemCount:
-                        //data.data?.results?.length ?? 0,
-                        state.favoritesFilms?.length ?? 0,
+                    itemCount: state.favoritesFilms?.length ?? 0,
                   ),
                 );
               },

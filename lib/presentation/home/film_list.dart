@@ -154,9 +154,10 @@ class _FilmListState extends State<FilmList> {
                                             }
                                             return FilmTile(
                                               // в зависимости от состояния меняем текст
-                                              textButton: isFavorite
-                                                  ? FilmLocal.deleteFavorites
-                                                  : FilmLocal.addFavorites,
+                                              iconButton: isFavorite
+                                                  ? const Icon(Icons.favorite)
+                                                  : const Icon(
+                                                      Icons.favorite_border),
                                               // CallBack по клику на кнопку
                                               onClickFavoriteButton: () {
                                                 //отправляем событие в блок
