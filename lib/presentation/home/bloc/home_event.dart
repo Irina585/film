@@ -11,6 +11,7 @@ abstract class HomeEvent extends Equatable {
 class SearchChangedEvent extends HomeEvent {
   final String search;
   const SearchChangedEvent({required this.search});
+  @override
   List<Object> get props => [search];
 }
 
