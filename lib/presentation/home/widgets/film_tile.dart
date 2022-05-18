@@ -78,7 +78,6 @@ class FilmTile extends StatelessWidget {
                                 Text(
                                     '${context.locale.language} ${filmCardModel?.language}',
                                     style: mainTextStyle),
-                                const SizedBox(height: 3),
                                 Row(
                                   children: [
                                     Expanded(
