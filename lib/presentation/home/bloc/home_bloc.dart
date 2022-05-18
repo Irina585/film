@@ -15,7 +15,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<ChangedFilmsDB>(_onChangedDB);
 
     // Подписываемя на Stream об изменении данных в БД
-    repository.onChangedFilmsDB().listen((List<FilmCardModel> changedFilmDB) {
+    repository.onChangedFilmsDB().listen((
+      List<FilmCardModel> changedFilmDB,
+    ) {
       add(ChangedFilmsDB(models: changedFilmDB));
     });
   }

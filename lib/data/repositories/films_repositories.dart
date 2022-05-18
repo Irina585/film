@@ -77,6 +77,7 @@ class FilmsRepository {
     // Передаем нашу модель и преобразуем её в модель для БД с помощью .toDatabase()
     await _db.into(_db.filmTable).insert(
           filmCardModel.toDatabase(),
+          // если записи нет, то добавляем новую; если запись есть - обновляем её
           mode: InsertMode.insertOrReplace,
         );
   }

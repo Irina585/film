@@ -27,6 +27,5 @@ class ChangedFavorites extends HomeEvent {
 // Событие об изменении данных в БД
 class ChangedFilmsDB extends HomeEvent {
   final List<FilmCardModel> models;
-
   const ChangedFilmsDB({required this.models});
 }

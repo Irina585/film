@@ -8,6 +8,8 @@ import 'package:film/presentation/navigation/bloc/navigation_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/home_bloc.dart';
+
 // вёрстка карточки фильма - List
 
 class FilmTile extends StatelessWidget {
@@ -77,13 +79,6 @@ class FilmTile extends StatelessWidget {
                                     '${context.locale.language} ${filmCardModel?.language}',
                                     style: mainTextStyle),
                                 const SizedBox(height: 3),
-                                IconButton(
-                                  onPressed: () {
-                                    onClickFavoriteButton?.call();
-                                  },
-                                  icon: iconButton,
-                                  color: Colors.red[500],
-                                ),
                                 Row(
                                   children: [
                                     Expanded(
@@ -92,6 +87,13 @@ class FilmTile extends StatelessWidget {
                                             filmCardModel?.voteAverage ?? 0),
                                         style: const TextStyle(fontSize: 16),
                                       ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        onClickFavoriteButton?.call();
+                                      },
+                                      icon: iconButton,
+                                      color: Colors.red[500],
                                     ),
                                   ],
                                 ),
