@@ -1,7 +1,6 @@
 import 'package:film/app/components/const.dart';
 import 'package:film/app/components/delayed_action.dart';
 import 'package:film/app/components/locals/locals.dart';
-import 'package:film/data/dtos/tv_maz/show_card_dto.dart';
 import 'package:film/domain/models/home_model.dart';
 import 'package:film/presentation/home/bloc/home_bloc.dart';
 import 'package:film/presentation/home/bloc/home_event.dart';
@@ -11,8 +10,6 @@ import 'package:film/presentation/navigation/bloc/navigation_bloc.dart';
 import 'package:film/presentation/navigation/bloc/navigation_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:collection/collection.dart';
 
 import '../settings/bloc/settings_bloc.dart';
@@ -24,7 +21,9 @@ import '../settings/bloc/settings_state.dart';
 class FilmList extends StatefulWidget {
   static final GlobalKey<State<StatefulWidget>> globalKey = GlobalKey();
 
-  const FilmList({Key? key}) : super(key: key);
+  const FilmList({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<FilmList> createState() => _FilmListState();
@@ -41,10 +40,8 @@ class _FilmListState extends State<FilmList> {
     super.didChangeDependencies();
   }
 
-  @override
-  void initState() {
-    refresh();
-    super.initState();
+  Future refresh() async {
+    context.read<HomeBloc>().add(LoadRefreshEvent());
   }
 
   @override
@@ -189,16 +186,6 @@ class _FilmListState extends State<FilmList> {
         ],
       ),
     );
-  }
-
-  Future refresh() async {
-    final url = Uri.parse('https://api.tvmaze.com/search/shows');
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      return ShowCardDTO.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Не удалось загрузить фильмы');
-    }
   }
 
   // Данный метод вызывается каждый раз при изменениях в поле поиска

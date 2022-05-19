@@ -17,6 +17,8 @@ class SearchChangedEvent extends HomeEvent {
 
 class LoadDataEvent extends HomeEvent {}
 
+class LoadRefreshEvent extends HomeEvent {}
+
 // Добавление / удаление избарнного по клику на кнопку
 class ChangedFavorites extends HomeEvent {
   final FilmCardModel? model;

@@ -13,6 +13,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<SearchChangedEvent>(_onSearchChanged);
     on<ChangedFavorites>(_onClickFavorites);
     on<ChangedFilmsDB>(_onChangedDB);
+    on<LoadRefreshEvent>(_onLoadRefresh);
 
     // Подписываемя на Stream об изменении данных в БД
     repository.onChangedFilmsDB().listen((
@@ -37,6 +38,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _onLoadData(LoadDataEvent event, Emitter<HomeState> emit) {
+    emit(state.copyWith(data: repository.loadData(q: search)));
+  }
+
+  void _onLoadRefresh(LoadRefreshEvent event, Emitter<HomeState> emit) {
     emit(state.copyWith(data: repository.loadData(q: search)));
   }
 
